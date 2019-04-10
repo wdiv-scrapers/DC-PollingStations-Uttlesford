@@ -1,12 +1,9 @@
-from dc_base_scrapers.hashonly_scraper import HashOnlyScraper
+from dc_base_scrapers.arcgis_scraper import ArcGisScraper
 
 
-stations_url = "http://www.uttlesford.gov.uk/CHttpHandler.ashx?id=6593&p=0"
-districts_url = "http://www.uttlesford.gov.uk/CHttpHandler.ashx?id=6594&p=0"
+districts_url = "https://services.arcgis.com/wDcUiJYKtMulHM03/arcgis/rest/services/Electoral_boundaries/FeatureServer/1/query?f=pjson&where=1%3D1&returnGeometry=true&spatialRel=esriSpatialRelIntersects&outFields=*&outSR=27700&resultOffset=0&resultRecordCount=4000&resultType=tile"
 council_id = 'E07000077'
 
 
-stations_scraper = HashOnlyScraper(stations_url, council_id, 'stations', 'csv')
-stations_scraper.scrape()
-districts_scraper = HashOnlyScraper(districts_url, council_id, 'districts', 'zip')
+districts_scraper = ArcGisScraper(districts_url, council_id, 'utf-8', 'districts', key='OBJECTID_12')
 districts_scraper.scrape()
